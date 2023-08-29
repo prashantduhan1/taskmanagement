@@ -39,6 +39,7 @@ function Home() {
   };
 
   const handleAddTask = async () => {
+     if(!newTask.title || !newTask.description){ alert("Title and description are mandatory"); return; }
     try {
       const response = await axios.post('https://task-management-l6a9.onrender.com/api/tasks', {
         title: newTask.title,
@@ -48,6 +49,7 @@ function Home() {
       if (response.status === 201) {
         console.log('Task added successfully.');
         fetchTasks();
+        setNewTask({ title: '', description: '' });
       } else {
         console.error('Task creation failed.');
       }
